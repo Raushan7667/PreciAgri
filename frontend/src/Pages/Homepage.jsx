@@ -5,7 +5,6 @@ import HomeProductSection from "../customer/Components/Home/HomeProductSection";
 import { useDispatch, useSelector } from "react-redux";
 import { findProducts } from "../Redux/Customers/Product/Action";
 import ProductCard from "../customer/Components/Product/ProductCard/ProductCard";
-import { fruits } from "../Data/Fruits/fruits";
 
 
 const Homepage = () => {
@@ -36,7 +35,7 @@ const { customersProduct } = useSelector((store) => store);
     <div className="">
       <HomeCarousel images={homeCarouselData} />
 
-      <HomeProductSection section={"Fruits"} data={fruits} />
+      {/* <HomeProductSection section={"Fruits"} data={fruits} /> */}
 
       {/* <div className="space-y-10 py-20">
         <div className="lg:col-span-4 w-full ">
