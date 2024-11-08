@@ -34,8 +34,9 @@ const login=async(req,res)=>{
         }
 
         const jwt=jwtProvider.generateToken(user._id);
+       // res.set('Authorization', `Bearer ${jwt}`);
 
-        user.token=jwt
+        
         user.save();
 
         return res.status(200).send({jwt,message:"login success"});

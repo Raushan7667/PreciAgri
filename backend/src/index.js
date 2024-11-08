@@ -46,4 +46,8 @@ app.use("/api/ratings",ratingRouter);
 const adminOrderRoutes=require("./routes/adminOrder.routes.js");
 app.use("/api/admin/orders",adminOrderRoutes);
 
+// seller routes handler
+const sellerOrderRoutes=require("./routes/sellerOrder.routes.js")
+app.use('/api',sellerOrderRoutes )
+
 module.exports={app};
