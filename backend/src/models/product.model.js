@@ -2,6 +2,12 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
+
+  sellerId: {
+    type: mongoose.Schema.Types.ObjectId, // Store seller ID as ObjectId
+    ref: 'users', // Reference to the users collection (assuming sellers are stored in users)
+    required: true,
+  },
   title: {
     type: String,
     // required: true,
