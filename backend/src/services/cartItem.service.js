@@ -24,27 +24,26 @@ async function createCartItem(cartItemData) {
 
 // Update an existing cart item
 async function updateCartItem(userId, cartItemId, cartItemData) {
-  
-  const item = await findCartItemById(cartItemId)
-  // console.log("cartItemData ",item)
+  const item = await findCartItemById(cartItemId);
+  console.log("cartItemData ", cartItemData);
 
-  if(!item){
-    throw new Error("cart item not found : ",cartItemId)
+  if (!item) {
+    throw new Error("cart item not found : ", cartItemId);
   }
   const user = await userService.findUserById(item.userId);
 
-  if(!user){
-    throw new Error("user not found : ",userId)
+  if (!user) {
+    throw new Error("user not found : ", userId);
   }
 
- 
-
   if (user.id === userId.toString()) {
-         
     const sizeInKg = parseFloat(cartItemData.size);
+    const prevQuantity = item.quantity;
     item.quantity = cartItemData.quantity;
-    item.price = item.quantity * item.product.price;
-    item.discountedPrice = item.quantity * item.product.discountedPrice;
+
+    // Calculate the new price based on the updated quantity
+    item.price = item.price / prevQuantity * item.quantity;
+    item.discountedPrice = item.discountedPrice / prevQuantity * item.quantity;
 
     const updatedCartItem = await item.save();
     return updatedCartItem;
@@ -52,7 +51,6 @@ async function updateCartItem(userId, cartItemId, cartItemData) {
     throw new Error("You can't update another user's cart_item");
   }
 }
-
 // Check if a cart item already exists in the user's cart
 async function isCartItemExist(cart, product, size, userId) {
   const cartItem = await CartItem.findOne({ cart, product, size, userId });

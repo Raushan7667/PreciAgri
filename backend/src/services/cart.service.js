@@ -41,7 +41,9 @@ async function findUserCart(userId) {
 
 // Add an item to the user's cart
 async function addCartItem(userId, req) {
- 
+    
+
+  console.log("req in add to cart item",req)
   const cart = await Cart.findOne({ user: userId });
   const product = await Product.findById(req.productId);
 
@@ -54,17 +56,19 @@ async function addCartItem(userId, req) {
       cart: cart._id,
       quantity: 1,
       userId,
-      price: product.discountedPrice,
+      price:req.chosedPrice,
       size: req.size,
-      discountedPrice:product.discountedPrice
+      discountedPrice:req.chosedDiscou
     });
-    const sizeInKg = parseFloat(req.size);
+  //  const sizeInKg = parseFloat(req.size);
      //  cartItem.price=cartItem.price*sizeInKg
     // cartItem.discountedPrice=cartItem.discountedPrice*sizeInKg
 
     const createdCartItem = await cartItem.save();
     cart.cartItems.push(createdCartItem);
     await cart.save();
+
+    console.log("saved cart item")
   }
 
   return 'Item added to cart';
