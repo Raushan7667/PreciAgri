@@ -66,13 +66,13 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-  const [selectedSize, setSelectedSize] = useState();
   const [activeImage, setActiveImage] = useState(null);
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { customersProduct,review } = useSelector((store) => store);
+  const { customersProduct, review } = useSelector((store) => store);
   const { productId } = useParams();
+  const [selectedSize, setSelectedSize] = useState(customersProduct.product?.sizes[0].name);
   const jwt = localStorage.getItem("jwt");
   // console.log("param",productId,customersProduct.product)
 
@@ -81,12 +81,15 @@ export default function ProductDetails() {
   };
 
   const handleSubmit = () => {
-    const data = { productId, size: selectedSize.name };
-    console.log()
+    if (!selectedSize) {
+      alert("Please select a size");
+      return;
+    }
+    const data = { productId,chosedPrice:price,chosedDiscou:discountedPrice,chosedisper:discountPer, size: selectedSize.name };
 
-   
-    dispatch(addItemToCart({ data,  jwt }));
-    if(jwt===null){
+
+    dispatch(addItemToCart({ data, jwt }));
+    if (jwt === null) {
       alert("Please Login First");
       navigate("/login");
       return;
@@ -101,6 +104,37 @@ export default function ProductDetails() {
   }, [productId]);
 
   // console.log("reviews ",review)
+  
+
+const [price,setPrice]=useState()
+const [discountedPrice,setDisPrice]=useState()
+
+useEffect(() => {
+  if (customersProduct.product?.sizes?.[0]?.price&&customersProduct.product?.sizes?.[0]?.
+    discountedPrice
+    ) {
+    setPrice(customersProduct.product.sizes[0].price);
+    setDisPrice(customersProduct.product.sizes[0].discountedPrice);
+  }
+}, [customersProduct.product]); 
+
+console.log("price is ",price)
+
+const discountPer=Math.floor((price - discountedPrice) * 100 /price);
+
+  // Function to update the product price based on selected size
+  function updateProductPrice(sizeName) {
+    console.log("selected size is1",sizeName)
+    if (sizeName) {
+      console.log("selected sizeName is",sizeName)
+               setPrice(sizeName.price)
+               setDisPrice(sizeName.
+                discountedPrice)
+      console.log(`Price updated to ${sizeName.price} for size: ${sizeName}`);
+    } else {
+      console.log(`Size ${sizeName} not found.`);
+    }
+  }
 
   return (
     <div className="bg-white lg:px-20">
@@ -187,13 +221,13 @@ export default function ProductDetails() {
               <h2 className="sr-only">Product information</h2>
               <div className="flex space-x-5 items-center text-lg lg:text-xl tracking-tight text-gray-900 mt-6">
                 <p className="font-semibold">
-                  ₹{customersProduct.product?.discountedPrice}
+                  ₹{discountedPrice}
                 </p>
                 <p className="opacity-50 line-through">
-                  ₹{customersProduct.product?.price}
+                  ₹{price}
                 </p>
                 <p className="text-green-600 font-semibold">
-                  {customersProduct.product?.discountPersent}% Off
+                  {discountPer}% Off
                 </p>
               </div>
 
@@ -225,7 +259,10 @@ export default function ProductDetails() {
 
                   <RadioGroup
                     value={selectedSize}
-                    onChange={setSelectedSize}
+                    onChange={(newSize) => {
+                      setSelectedSize(newSize); // Update the selected size
+                      updateProductPrice(newSize); // Call the function to update the price
+                    }}
                     className="mt-4"
                   >
                     <RadioGroup.Label className="sr-only">
@@ -236,10 +273,10 @@ export default function ProductDetails() {
                         <RadioGroup.Option
                           key={size.name}
                           value={size}
-                          disabled={size.quantity==0}
+                          disabled={size.quantity === 0}
                           className={({ active }) =>
                             classNames(
-                              size.quantity>=0
+                              size.quantity >= 0
                                 ? "cursor-pointer bg-white text-gray-900 shadow-sm"
                                 : "cursor-not-allowed bg-gray-50 text-gray-200",
                               active ? "ring-1 ring-indigo-500" : "",
@@ -252,7 +289,7 @@ export default function ProductDetails() {
                               <RadioGroup.Label as="span">
                                 {size.name}
                               </RadioGroup.Label>
-                              {size.quantity>=0 ? (
+                              {size.quantity >= 0 ? (
                                 <span
                                   className={classNames(
                                     active ? "border" : "border-2",
@@ -351,7 +388,7 @@ export default function ProductDetails() {
             <Grid container spacing={7}>
               <Grid item xs={7}>
                 <div className="space-y-5">
-                  { review.reviews?.map((item, i) => (
+                  {review.reviews?.map((item, i) => (
                     <ProductReviewCard item={item} />
                   ))}
                 </div>
