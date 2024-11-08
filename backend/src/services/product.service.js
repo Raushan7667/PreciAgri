@@ -4,7 +4,8 @@ const User=require("../models/user.model")
 
 // Create a new product
 async function createProduct(req) {
-   reqData=req.body
+  const reqData=req.body
+  const userId = req.user._id;
   let topLevel = await Category.findOne({ name: reqData.topLavelCategory });
  
   if (!topLevel) {
@@ -48,7 +49,10 @@ async function createProduct(req) {
  
   const discountPercent = Math.round(((reqData.price - reqData.discountedPrice) / reqData.price) * 100);
   const price=reqData.price
+ 
+  
   const product = new Product({
+    sellerId:userId,
     title: reqData.title,
     color: reqData.color,
     description: reqData.description,
@@ -66,8 +70,16 @@ async function createProduct(req) {
   const savedProduct = await product.save();
 
 
-  const userId=req.user._id
-  console.log("userId: " + userId)
+ 
+  
+  console.log("user id is1 " + userId);
+  const user = await User.findById(userId);
+
+  if (user) {
+    user.product.push(savedProduct._id);
+    await user.save();
+  }
+
  
   return savedProduct;
 }

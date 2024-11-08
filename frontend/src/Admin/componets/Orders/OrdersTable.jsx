@@ -44,6 +44,8 @@ const OrdersTable = () => {
   const { adminsOrder } = useSelector((store) => store);
   const [anchorElArray, setAnchorElArray] = useState([]);
 
+  console.log("Admin order",adminsOrder)
+
   useEffect(() => {
     dispatch(getOrders({ jwt }));
   }, [jwt,adminsOrder.delivered, adminsOrder.shipped, adminsOrder.confirmed]);

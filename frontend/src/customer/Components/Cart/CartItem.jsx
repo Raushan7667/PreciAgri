@@ -20,6 +20,9 @@ const CartItem = ({ item,showButton }) => {
     dispatch(updateCartItem(data))
   }
 
+  console.log("Data came in cart",item)
+
+  const discountPercentage = Math.floor((item?.price - item?.discountedPrice) * 100 / item?.price);
 
 
   
@@ -38,12 +41,12 @@ const CartItem = ({ item,showButton }) => {
           <p className="opacity-70">Size: {item?.size}</p>
           <p className="opacity-70 mt-2">Seller: {item?.product?.brand}</p>
           <div className="flex space-x-2 items-center pt-3">
-            <p className="opacity-50 line-through">₹{item?.product?.price}</p>
+            <p className="opacity-50 line-through">₹{item?.price}</p>
             <p className="font-semibold text-lg">
-              ₹{item?.product?.discountedPrice}
+              ₹{item?.discountedPrice}
             </p>
             <p className="text-green-600 font-semibold">
-              {item?.product?.discountPersent}% off
+              {discountPercentage}% off
             </p>
           </div>
         </div>

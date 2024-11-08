@@ -125,7 +125,7 @@ async function getAllOrders() {
     populate: {
       path: "product",
     },
-  })
+  }).populate("shippingAddress")
   .lean();;
 }
 
