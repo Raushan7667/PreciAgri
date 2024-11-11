@@ -4,9 +4,11 @@ const cors=require('cors');
 const app=express();
 
 app.use(express.json())
-app.use(cors(
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow requests only from the frontend
    
-))
+    credentials: true // Allow cookies and other credentials
+}));
 
 app.get("/",(req,res)=>{
     return res.status(200).send({message:"welcome to ecommerce api - node"})
