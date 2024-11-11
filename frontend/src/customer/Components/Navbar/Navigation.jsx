@@ -24,12 +24,12 @@ export default function Navigation() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { auth,cart } = useSelector((store) => store);
+  const { auth, cart } = useSelector((store) => store);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
   const jwt = localStorage.getItem("jwt");
-  const location=useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     if (jwt) {
@@ -37,7 +37,7 @@ export default function Navigation() {
       dispatch(getCart(jwt));
     }
   }, [jwt]);
-  
+
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -50,7 +50,7 @@ export default function Navigation() {
   };
   const handleClose = () => {
     setOpenAuthModal(false);
-   
+
   };
 
   const handleCategoryClick = (category, section, item, close) => {
@@ -62,10 +62,10 @@ export default function Navigation() {
   };
 
   useEffect(() => {
-    if (auth.user){ 
+    if (auth.user) {
       handleClose();
     }
-    if( auth.user?.role!=="ADMIN"&&(location.pathname==="/login" || location.pathname==="/register")){
+    if (auth.user?.role !== "ADMIN" && (location.pathname === "/login" || location.pathname === "/register")) {
       navigate(-1)
     }
   }, [auth.user]);
@@ -74,7 +74,7 @@ export default function Navigation() {
     handleCloseUserMenu();
     dispatch(logout());
   };
-  const handleMyOrderClick=()=>{
+  const handleMyOrderClick = () => {
     handleCloseUserMenu()
     navigate("/account/order")
   }
@@ -354,7 +354,7 @@ export default function Navigation() {
                                             className="font-medium text-gray-900"
                                           >
                                             {section.name}
-                                            
+
                                           </p>
                                           {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
                                           <ul
@@ -411,7 +411,7 @@ export default function Navigation() {
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   {auth.user ? (
-                    <div>
+                    <div className="flex items-center space-x-4">
                       <Avatar
                         className="text-white"
                         onClick={handleUserClick}
@@ -427,6 +427,16 @@ export default function Navigation() {
                       >
                         {auth.user?.firstName[0].toUpperCase()}
                       </Avatar>
+
+                      {/* Conditional "Sell Now" Button for Seller */}
+                      {auth.user?.role === "SELLER" && (
+                        <Button
+                          onClick={() => navigate("/seller")}
+                          className="text-sm font-medium text-blue-600 hover:text-blue-800"
+                        >
+                          Sell Now
+                        </Button>
+                      )}
                       {/* <Button
                         id="basic-button"
                         aria-controls={open ? "basic-menu" : undefined}
@@ -448,7 +458,7 @@ export default function Navigation() {
                         <MenuItem onClick={handleProfileClick}>
                           Profile
                         </MenuItem>
-                        
+
                         <MenuItem onClick={handleMyOrderClick}>
                           My Orders
                         </MenuItem>
