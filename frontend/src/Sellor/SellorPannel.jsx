@@ -19,22 +19,32 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deepPurple } from "@mui/material/colors";
 import Dashboard from "../Admin/Views/Admin";
-import { logout } from "../Redux/Auth/Action";
+import { getUser, logout } from "../Redux/Auth/Action";
 import AdminNavbar from "../Admin/Navigation/AdminNavbar";
 import { customTheme } from "../Admin/them/customeThem";
-const menu = [
-  {name:"Dashboard",path:"/seller"},
-  {name:"Products",path:"/seller/products"},
-  {name:"Orders",path:"/seller/orders"},
-  {name:"Total Earnings",path:"/seller"},
-  {name:"Weekly Overview",path:"/seller"},
-  {name:"Monthly Overview",path:"/seller"},
-  {name:"Add Product",path:"/seller/product/create"},
-];
-const drawerWidth = 240;
-const SellorPannel = () => {
+import OrderTable from "./component/Order/OrderTable";
+import CreateProductForm from "../Admin/componets/createProduct/CreateProductFrom";
+import ProductTable from "./component/ProductTable/ProductTable";
 
- 
+const SellorPannel = () => {
+  const {auth}=useSelector(store=>store);
+
+
+  console.log("auth is here",auth.user?._id)
+
+
+  const menu = [
+    {name:"Dashboard",path:"/seller"},
+    {name:"Products",path:"/seller/products"},
+    {name:"Orders",path:`/seller/orders/`},
+    {name:"Total Earnings",path:"/seller"},
+    {name:"Weekly Overview",path:"/seller"},
+    {name:"Monthly Overview",path:"/seller"},
+    {name:"Add Product",path:"/seller/product/create"},
+  ];
+  const drawerWidth = 240;
+
+  const jwt = localStorage.getItem("jwt");
  const theme = useTheme();
  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
@@ -42,7 +52,7 @@ const SellorPannel = () => {
   const [sideBarVisible, setSideBarVisible] = React.useState(false);
   const navigate=useNavigate();
   const dispatch=useDispatch()
-  const {auth}=useSelector(store=>store);
+ 
 
 
 
@@ -52,6 +62,14 @@ const SellorPannel = () => {
     navigate("/")
 
   };
+  
+  
+
+  React.useEffect(() => {
+    if (jwt) {
+      dispatch(getUser(jwt));
+    }
+  }, [jwt]);
 
 
   const drawer = (
@@ -151,13 +169,13 @@ const SellorPannel = () => {
         <Box className="adminContainer" component="main" sx={{ flexGrow: 1 }}>
           <Toolbar />
           <Routes>
-            {/* <Route path="/" element={ <Dashboard/>}></Route> */}
-            {/* <Route path="/product/create" element={<CreateProductForm/>}></Route>
-            <Route path="/product/update/:productId" element={<UpdateProductForm/>}></Route>
-            <Route path="/products" element={<ProductsTable/>}></Route>
-            <Route path="/orders" element={<OrdersTable/>}></Route>
-            <Route path="/customers" element={<Customers/>}></Route>
-            <Route path="/demo" element={<DemoAdmin />}></Route> */}
+            <Route path="/" element={ <Dashboard/>}></Route>
+            <Route path="/product/create" element={<CreateProductForm/>}></Route>
+            {/* <Route path="/product/update/:productId" element={<UpdateProductForm/>}></Route> */}
+            <Route path="/products" element={<ProductTable/>}></Route>
+            <Route path={`/orders/`} element={<OrderTable/>}></Route>
+            {/* <Route path="/customers" element={<Customers/>}></Route> */}
+            {/* <Route path="/demo" element={<DemoAdmin />}></Route> */}
           </Routes>
          
         </Box>
