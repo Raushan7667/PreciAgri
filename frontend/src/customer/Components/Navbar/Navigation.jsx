@@ -65,7 +65,7 @@ export default function Navigation() {
     if (auth.user){ 
       handleClose();
     }
-    if( auth.user?.role!=="ADMIN" && (location.pathname==="/login" || location.pathname==="/register")){
+    if( auth.user?.role!=="ADMIN"&&(location.pathname==="/login" || location.pathname==="/register")){
       navigate(-1)
     }
   }, [auth.user]);

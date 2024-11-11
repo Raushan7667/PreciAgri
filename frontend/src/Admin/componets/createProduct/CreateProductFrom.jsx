@@ -290,7 +290,7 @@ const CreateProductForm = () => {
             />
           </Grid>
           {productData.size.map((size, index) => (
-            <Grid container item spacing={3} >
+            <Grid container item spacing={3} key={index} >
               <Grid item xs={12} sm={3}>
                 <TextField
                   label="Size Name"
