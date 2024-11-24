@@ -31,7 +31,7 @@ const OrderCard = ({ item, order }) => {
         </Grid>
 
         <Grid item xs={2}>
-          <p>₹{item?.price}</p>
+          <p>₹{item?.discountedPrice}</p>
         </Grid>
         <Grid item xs={4}>
           <p className="space-y-2 font-semibold">
@@ -41,7 +41,7 @@ const OrderCard = ({ item, order }) => {
                   sx={{ width: "15px", height: "15px" }}
                   className="text-green-600 p-0 mr-2 text-sm"
                 />
-                <span>Delivered On Mar 03</span>
+                <span>Delivered On Dec 03</span>
 
             </>
             ):  <>
@@ -50,7 +50,7 @@ const OrderCard = ({ item, order }) => {
                 sx={{ width: "15px", height: "15px" }}
                 className="text-green-600 p-0 mr-2 text-sm"
               />
-              <span>Expected Delivery On Mar 03</span>
+              <span>Expected Delivery On Dec 03</span>
               </>}
             
           </p>

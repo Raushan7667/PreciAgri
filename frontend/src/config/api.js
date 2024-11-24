@@ -10,10 +10,21 @@ const api = axios.create({
 });
 
 const token = localStorage.getItem('jwt');
-console.log("token in localStorage",token)
+console.log("token in localStorage api file",token)
 
-api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+api.interceptors.request.use(
+  (config) => {
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+// api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-api.defaults.headers.post['Content-Type'] = 'application/json';
+// api.defaults.headers.post['Content-Type'] = 'application/json';
 
 export default api;

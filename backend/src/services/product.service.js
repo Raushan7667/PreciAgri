@@ -22,6 +22,8 @@ async function createProduct(req) {
     parentCategory: topLevel._id,
   });
 
+  console.log("secondLevel", secondLevel)
+
   if (!secondLevel) {
     const secondLavelCategory = new Category({
       name: reqData.secondLavelCategory,

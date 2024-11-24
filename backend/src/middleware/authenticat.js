@@ -6,10 +6,10 @@ const jwt = require('jsonwebtoken');
  const authenticate = async(req,res,next)=>{
 
     try {
-        const authHeader = req.headers.authorization;
+        const authHeader = await req.headers.authorization;
         const token = authHeader && authHeader.split(' ')[1]; 
 
-        console.log("token is " + token);
+        console.log("token is in middleware " + token);
         if(!token){
             return res.status(404).send({message:"token not found"})
         }

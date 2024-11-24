@@ -20,6 +20,7 @@ import {
 import api, { API_BASE_URL } from "../../../config/api";
 
 export const findProducts = (reqData) => async (dispatch) => {
+  console.log( "find product by cat reqdata", reqData)
   const {
     colors,
     sizes,
