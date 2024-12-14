@@ -8,7 +8,6 @@ const createPaymentLink= async (orderId)=>{
     try {
         
         const order = await orderService.findOrderById(orderId);
-    
         const paymentLinkRequest = {
           amount:order.totalDiscountedPrice*100,
           currency: 'INR',

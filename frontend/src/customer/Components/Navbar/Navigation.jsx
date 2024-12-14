@@ -16,6 +16,9 @@ import { deepPurple } from "@mui/material/colors";
 import { getUser, logout } from "../../../Redux/Auth/Action";
 import { getCart } from "../../../Redux/Customers/Cart/Action";
 
+
+console.log("navigation path",navigation.pages)
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -207,8 +210,8 @@ export default function Navigation() {
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
                       <a
-                        href={page.href}
-                        className="-m-2 block p-2 font-medium text-gray-900"
+                        href={page.path}
+                        className="-m-2 block p-2 font-medium text-gray-900 "
                       >
                         {page.name}
                       </a>
@@ -399,8 +402,8 @@ export default function Navigation() {
                   {navigation.pages.map((page) => (
                     <a
                       key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      href={page.path}
+                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800 hover:cursor-pointer"
                     >
                       {page.name}
                     </a>

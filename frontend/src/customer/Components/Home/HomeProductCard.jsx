@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const HomeProductCard = ( {product,index} ) => {
   const navigate = useNavigate();
 
-  console.log("product in card","index: " + index, "product:",product)
+ 
 
  
 

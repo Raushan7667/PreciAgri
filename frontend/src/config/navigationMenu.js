@@ -8,13 +8,13 @@ export const navigation = {
           name: 'New Arrivals',
           href: '/',
           imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0AoXxEa-ufs2oXHUnrQrGCiY1mtUm3O7xBQ&s',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+          imageAlt: '',
         },
         {
           name: 'Basic Tees',
           href: '/',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+          imageSrc: '',
+          imageAlt: '.',
         },
       ],
       sections: [
@@ -28,8 +28,8 @@ export const navigation = {
 
             { name: 'Barley', id: 'barley' },
 
-            { name: 'Sugarcane', id: 'sugercane' },
-            { name: 'Millet', id: 'milet' },
+            { name: 'Sugarcane', id: 'sugarcane' },
+            { name: 'Millet', id: 'millet' },
             { name: 'Coconut', id: 'coconut' },
             { name: 'Oil Palm', id: 'oilpalm' },
           ],
@@ -119,14 +119,14 @@ export const navigation = {
           name: 'New Arrivals',
           id: '#',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-          imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
+          imageAlt: '',
         },
         {
           name: 'Artwork Tees',
           id: '#',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
           imageAlt:
-            'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
+            '',
         },
       ],
       sections: [
@@ -173,12 +173,27 @@ export const navigation = {
         },
       ],
 
-    }
+    },
+
   ],
 
 
   pages: [
-    { name: 'Company', id: '/' },
-    { name: 'Stores', id: '/' },
+    {
+      name: 'Company',
+      id: '/',
+      path: '/companies',
+    },
+
+    { name: 'News', 
+      id: '/',
+      path:"/news"
+     },
+
+     {
+      name:"Farming Tips",
+      id: 'farming-tips',
+      path: '/farming-tips',
+     }
   ],
 }

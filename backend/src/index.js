@@ -1,7 +1,8 @@
 const express=require("express")
 const cors=require('cors');
-
+const fileUpload=require("express-fileupload")
 const app=express();
+const {uploadImageToCloudinary}=require("../src/utils/imageUploader.js")
 
 app.use(express.json())
 app.use(cors({
@@ -9,6 +10,29 @@ app.use(cors({
    
     credentials: true // Allow cookies and other credentials
 }));
+
+app.use(
+    fileUpload({
+        useTempFiles:true,
+        tempFileDir:"/tmp",
+      
+     
+    })
+)
+
+app.post('/uploadd', async (req, res) => {
+    try {
+      const file = req.files.image; // Frontend should send the file with key 'image'
+      const result = await uploadImageToCloudinary(
+        file,
+        process.env.FOLDER_NAME,
+        1000,
+        1000);
+      res.status(200).json({ url: result.secure_url });
+    } catch (error) {
+      res.status(500).json({ message: 'Upload failed', error });
+    }
+  });
 
 app.get("/",(req,res)=>{
     return res.status(200).send({message:"welcome to ecommerce api - node"})

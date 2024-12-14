@@ -16,19 +16,19 @@ const data = [
   {
     progress: 75,
     imgHeight: 20,
-    title: 'Men',
+    title: 'Seller',
     color: 'primary',
     amount: '$24,895.65',
-    subtitle: 'Clothing, Footware',
+    subtitle: 'Pesticide ,Seed',
     imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/shirt/z/3/7/xl-r-dark-grey-stoneberg-original-imaghghn2vcf5euv.jpeg?q=70'
   },
   {
     progress: 50,
     color: 'info',
     imgHeight: 27,
-    title: 'Women',
+    title: 'Admin',
     amount: '$8,650.20',
-    subtitle: 'Clothing, Handbags, jewellery',
+    subtitle: 'Pesticide Seed',
     imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/lehenga-choli/y/p/c/free-half-sleeve-jk-6-kedar-fab-original-imaghh4unhxgyveg.jpeg?q=70'
   },
   {
@@ -37,7 +37,7 @@ const data = [
     title: 'Kids',
     color: 'secondary',
     amount: '$1,245.80',
-    subtitle: 'Clothing',
+    subtitle: 'Equipment & Equipment',
     imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/kids-t-shirt/i/7/e/10-11-years-bwtrnfulboy-bz55-blive-original-imagmuafh2ennezv.jpeg?q=70'
   }
 ]

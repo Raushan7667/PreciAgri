@@ -1,5 +1,13 @@
 // productController.js
 const productService = require("../services/product.service.js")
+const {uploadUmageToCloudinary}=require("../utils/imageUploader.js")
+
+
+
+// uplod image of product
+
+
+
 
 // Create a new product
 async function createProduct(req, res) {

@@ -42,7 +42,7 @@ const HomeProductSection = ({ section, data }) => {
         <HomeProductCard product={item} index={index} />
     </div>
 ));
-  console.log("Items", items);
+ 
 
   // const slideInFromRight = (t) => {
   //   return `translateX(${100 - t * 100}%)`;

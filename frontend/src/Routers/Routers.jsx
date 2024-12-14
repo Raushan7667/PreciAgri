@@ -14,6 +14,7 @@ import DemoAdmin from "../Admin/Views/DemoAdmin";
 import AdminPannel from "../Admin/AdminPannel";
 import Navigation from "../customer/Components/Navbar/Navigation";
 import SellorPannel from "../Sellor/SellorPannel";
+import News from "../customer/Components/News/News";
 
 const Routers = () => {
   return (
@@ -33,6 +34,7 @@ const Routers = () => {
         <Route path="/men" element={<Product/>}></Route>
         <Route path="/product/:productId" element={<ProductDetails/>}></Route>
         <Route path="/cart" element={<Cart/>}></Route>
+        <Route path="/news" element={<News/>}></Route>
       
 
         <Route path="/admin" element={<AdminPannel/>}></Route>

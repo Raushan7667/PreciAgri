@@ -24,7 +24,7 @@ const initialSizes = [
 ];
 
 const CreateProductForm = () => {
-  // const subCategories=[["Top","Jeans"],["Watch","Mobile"]];
+ 
   const [subCategory, setSubCategory] = useState(0);
 
   const [subCategories, setSubCategories] = useState([]);
